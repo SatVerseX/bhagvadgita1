@@ -125,73 +125,69 @@ export default function ChaptersPage() {
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-800"> 
           श्रीमद्भगवद्गीता के <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-pink-400">प्यारे अध्याय</span>
         </h1>
-        <p className="text-lg sm:text-xl text-amber-700 mt-4 max-w-3xl mx-auto"> 
+        <p className="text-lg sm:text-xl text-amber-700 mt-4 max-w-2xl mx-auto"> 
           ज्ञान के रंगीन सागर में गोता लगाएँ! हर अध्याय में है एक नई कहानी, एक नई सीख।
         </p>
       </header>
 
-      <div className="max-w-[1920px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8 lg:gap-10">
-          {chapters.map((chapter: GitaChapter, index) => {
-            const accentColor = extendedAccentColors[index % extendedAccentColors.length];
-            const icon = chapterIcons[(chapter.chapter_number - 1) % chapterIcons.length] || chapterIcons[0]; 
-            const cardBgGradient = getGradientBackground(accentColor);
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 lg:gap-8">
+        {chapters.map((chapter: GitaChapter, index) => {
+          const accentColor = extendedAccentColors[index % extendedAccentColors.length];
+          const icon = chapterIcons[(chapter.chapter_number - 1) % chapterIcons.length] || chapterIcons[0]; 
+          const cardBgGradient = getGradientBackground(accentColor);
 
-            return (
-              <Link
-                key={chapter.id} 
-                href={`/user/chapters/${chapter.chapter_number}`}
-                className="block bg-white rounded-3xl shadow-2xl hover:shadow-purple-300/50 group relative overflow-hidden transition-all duration-300 ease-out flex flex-col min-h-[320px] lg:min-h-[350px] border-4 hover:scale-105"
-                style={{ 
-                  borderColor: accentColor,
-                }}
-              >
-                {/* Subtle gradient overlay */}
-                <div 
-                  className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-300 rounded-2xl pointer-events-none"
-                  style={{ backgroundImage: cardBgGradient, zIndex: 0 }}
-                ></div>
-                
-                {/* Card Content */}
-                <div className="relative p-8 flex flex-col flex-grow z-10">
-                  <div className="flex-grow">
-                    <div className="flex items-center justify-between mb-3">
-                      <div 
-                        className="font-extrabold text-3xl sm:text-4xl tracking-tighter" 
-                        style={{ color: accentColor }}
-                      >
-                        अध्याय {chapter.chapter_number}
-                      </div>
-                      <div 
-                        className="text-sm font-semibold py-2 px-4 rounded-full shadow-sm"
-                        style={{backgroundColor: `${accentColor}20`, color: accentColor }}
-                      >
-                        {chapter.verses_count} श्लोक
-                      </div>
-                    </div>
-                    <h2 className="font-serif font-bold text-2xl sm:text-3xl text-slate-700 mb-2 group-hover:text-purple-600 transition-colors duration-200">
-                      {chapter.name_translated || chapter.name}
-                    </h2>
-                    <h3 className="font-sans font-medium text-lg text-slate-500 mb-4 group-hover:text-slate-600 transition-colors duration-200">
-                      {chapter.name_transliterated}
-                    </h3>
-                    <p className="text-base text-slate-600 leading-relaxed line-clamp-3 group-hover:text-slate-700 transition-colors duration-200">
-                      {chapter.chapter_summary}
-                    </p>
+          return (
+            <Link
+              key={chapter.id} 
+              href={`/user/chapters/${chapter.chapter_number}`}
+              className="block bg-white rounded-3xl shadow-2xl hover:shadow-purple-300/50 group relative overflow-hidden transition-all duration-300 ease-out flex flex-col min-h-[320px] lg:min-h-[350px] border-4 hover:scale-105"
+              style={{ 
+                borderColor: accentColor,
+              }}
+            >
+              {/* Subtle gradient overlay - make sure it's behind content */}
+              <div 
+                className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-300 rounded-2xl pointer-events-none"
+                style={{ backgroundImage: cardBgGradient, zIndex: 0 }}
+              ></div>
+              
+              {/* Card Content (needs to be above the gradient overlay) */}
+              <div className="relative p-6 flex flex-col flex-grow z-10">
+                <div className="flex-grow mb-4">
+                  <div 
+                    className="font-extrabold text-2xl sm:text-3xl mb-2 tracking-tighter" // Bolder, tighter tracking
+                    style={{ color: accentColor }}
+                  >
+                    अध्याय {chapter.chapter_number}
                   </div>
-                  <div className="flex justify-end mt-6 pt-4 border-t border-orange-100">
-                    <div 
-                      className="text-7xl sm:text-8xl text-right transition-all duration-300 ease-out group-hover:rotate-[15deg] group-hover:scale-[1.35]"
-                      style={{ color: accentColor }}
-                    >
-                      {icon}
-                    </div>
-                  </div>
+                  <h2 className="font-serif font-bold text-xl sm:text-2xl text-slate-700 mb-1 group-hover:text-purple-600 transition-colors duration-200">
+                    {chapter.name_translated || chapter.name}
+                  </h2>
+                  <h3 className="font-sans font-medium text-sm text-slate-500 mb-4 group-hover:text-slate-600 transition-colors duration-200">
+                    {chapter.name_transliterated}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed line-clamp-3 group-hover:text-slate-700 transition-colors duration-200">
+                    {chapter.chapter_summary}
+                  </p>
                 </div>
-              </Link>
-            );
-          })}
-        </div>
+                <div className="flex justify-between items-end mt-auto">
+                    <div 
+                        className="text-xs font-semibold py-1.5 px-3 rounded-full shadow-sm"
+                        style={{backgroundColor: `${accentColor}30`, color: accentColor }} // Slightly stronger background
+                    >
+                        {chapter.verses_count} श्लोक
+                    </div>
+                    <div 
+                        className="text-6xl sm:text-7xl text-right transition-all duration-300 ease-out group-hover:rotate-[15deg] group-hover:scale-[1.35]" // More rotation and scale
+                        style={{ color: accentColor }}
+                    >
+                        {icon}
+                    </div>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

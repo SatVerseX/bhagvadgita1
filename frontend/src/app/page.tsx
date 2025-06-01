@@ -50,6 +50,8 @@ export default function HomePage() {
             <BookOpen className="w-6 h-6 mr-3 transform group-hover:rotate-[-5deg] transition-transform" />
             Read Chapters
           </Link>
+          {/* Removed Test Your Knowledge (Quiz) button as requested */}
+          {/* 
           <Link 
             href="/user/quiz" 
             className="inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-orange-600 bg-white border-2 border-orange-500 rounded-xl shadow-lg hover:bg-orange-50 hover:text-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 transform hover:scale-110 transition-all duration-200 ease-in-out group"
@@ -57,6 +59,7 @@ export default function HomePage() {
             <PlayCircle className="w-6 h-6 mr-3 transform group-hover:rotate-[5deg] transition-transform" />
             Test Your Knowledge (Quiz)
           </Link>
+          */}
         </div>
       </main>
 

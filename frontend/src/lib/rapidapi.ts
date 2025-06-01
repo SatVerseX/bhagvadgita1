@@ -94,3 +94,30 @@ export async function fetchVerse(chapterId: number, verseId: number): Promise<Gi
     throw error;
   }
 }
+
+export async function fetchChapterDetails(chapterId: number): Promise<GitaChapter> {
+  try {
+    if (!RAPIDAPI_KEY) {
+      throw new Error('RapidAPI key is not configured');
+    }
+
+    const res = await fetch(
+      `https://${RAPIDAPI_HOST}/v2/chapters/${chapterId}/`,
+      {
+        headers,
+        cache: 'no-store',
+      }
+    );
+
+    if (!res.ok) {
+      const error = await res.text();
+      console.error('API Error:', error);
+      throw new Error('Failed to fetch chapter details');
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error;
+  }
+}

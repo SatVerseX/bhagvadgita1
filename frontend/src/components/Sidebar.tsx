@@ -73,7 +73,6 @@ export default function Sidebar() {
   const commonLinks = [
     { href: '/', label: 'Home', icon: Home },
     { href: '/user/chapters', label: 'Chapters', icon: BookOpen },
-    { href: '/user/quiz', label: 'Quiz', icon: HelpCircle },
   ];
 
   const userRoutes = [

@@ -1,18 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Baloo_2, Inter } from "next/font/google";
 import "./globals.css";
 // import Header from "@/components/Header"; // We'll replace this with Sidebar
 import Sidebar from "@/components/Sidebar"; 
 import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
+
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const baloo = Baloo_2({
+  subsets: ["latin", "devanagari"], // Added devanagari for Hindi support
+  variable: "--font-baloo",
+  weight: ["400", "500", "600", "700", "800"], // Specify weights if needed
 });
 
 export const metadata: Metadata = {
@@ -27,16 +38,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen flex flex-col bg-amber-50/95 text-foreground antialiased">
-        <div className="flex flex-1 min-h-screen">
+    <html lang="en" className={`${inter.variable} ${baloo.variable} h-full`}>
+      <body className="font-sans antialiased flex flex-col min-h-screen bg-amber-50">
+        <div className="flex flex-1">
           <Sidebar />
-          <div className="flex flex-col flex-1 w-full min-h-screen bg-gradient-to-br from-amber-50/90 via-amber-50/95 to-pink-50/90"> 
-            <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-12 xl:px-16 max-w-7xl">
-              {children}
-            </main>
+          <main className="flex-1 flex flex-col overflow-y-auto lg:ml-[280px] xl:ml-[320px]">
+            {children}
             <Footer />
-          </div>
+          </main>
         </div>
       </body>
     </html>
