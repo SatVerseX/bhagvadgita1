@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
 
         <p className="text-blue-700/80 text-xs">
-          © {currentYear} GitaVerse. All rights reserved. (Psst! Share the wisdom, it's for everyone! 🌈)
+          © {currentYear} GitaVerse. All rights reserved. (Psst! Share the wisdom, it\'s for everyone! 🌈)
         </p>
       </div>
     </footer>

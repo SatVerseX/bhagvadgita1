@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase/firebaseClient';
 import { User } from 'firebase/auth';
 import Image from 'next/image';
-import { MailCheck, MailWarning, CalendarHeart, ShieldCheck, LogIn, Sparkles, UserCircle2 } from 'lucide-react'; // Fun icons
+import { MailCheck, MailWarning, CalendarHeart, Sparkles, UserCircle2 } from 'lucide-react'; // Fun icons
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);

@@ -1,7 +1,8 @@
 // Admin quiz dashboard
 'use client';
 
-import { useState, useEffect } from 'react';
+// Removed useState and useEffect as they are no longer used
+// import { useState, useEffect } from 'react';
 // No longer importing Firestore modules as quiz management is removed
 // import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 // import { db } from '@/firebase/firebaseClient';
@@ -46,7 +47,7 @@ export default function AdminDashboard() {
           Please check back later for more amazing features!
         </p>
         <p className="mt-4 text-sm text-purple-500 italic">
-          (They're fuelled by bananas and pure determination! 🍌)
+          (They\'re fuelled by bananas and pure determination! 🍌)
         </p>
       </div>
     </div>
