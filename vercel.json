@@ -1,6 +1,31 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "frontend/.next",
   "installCommand": "npm install",
-  "framework": "nextjs"
+  "outputDirectory": "frontend/.next",
+  "devCommand": "npm run dev",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/frontend/$1" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "github": {
+    "silent": true
+  },
+  "crons": [],
+  "functions": {},
+  "version": 2,
+  "projects": [
+    {
+      "root": "frontend"
+    }
+  ]
 } 
