@@ -47,7 +47,7 @@ export default function AdminDashboard() {
           Please check back later for more amazing features!
         </p>
         <p className="mt-4 text-sm text-purple-500 italic">
-          (They\'re fuelled by bananas and pure determination! 🍌)
+          (They&apos;re fuelled by bananas and pure determination! 🍌)
         </p>
       </div>
     </div>
