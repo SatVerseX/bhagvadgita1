@@ -1,31 +1,15 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "outputDirectory": "frontend/.next",
-  "devCommand": "npm run dev",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/frontend/$1" }
-  ],
-  "headers": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
+      "src": "frontend/next.config.js",
+      "use": "@vercel/next"
     }
   ],
-  "github": {
-    "silent": true
-  },
-  "crons": [],
-  "functions": {},
-  "version": 2,
-  "projects": [
+  "routes": [
     {
-      "root": "frontend"
+      "src": "/(.*)",
+      "dest": "frontend/$1"
     }
   ]
-} 
+}

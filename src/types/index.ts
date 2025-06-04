@@ -45,16 +45,3 @@ export interface GitaChapter {
     }[];
   }
   
-  export interface QuizQuestion {
-    id: string;
-    question: string;
-    options: string[];
-    answer: string;
-  }
-  
-  export interface Quiz {
-    id: string;
-    title: string;
-    questions: QuizQuestion[];
-  }
-  

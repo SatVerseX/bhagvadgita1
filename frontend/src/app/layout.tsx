@@ -28,7 +28,7 @@ const baloo = Baloo_2({
 
 export const metadata: Metadata = {
   title: "GitaVerse - Bhagavad Gita Insights",
-  description: "Explore the Bhagavad Gita with translations, commentaries, and quizzes. Your modern guide to ancient wisdom.",
+  description: "Explore the Bhagavad Gita with translations, commentaries. Your modern guide to ancient wisdom.",
   keywords: ["Bhagavad Gita", "Gita", "Hinduism", "Spirituality", "Yoga", "Meditation", "Indian Philosophy"],
 };
 

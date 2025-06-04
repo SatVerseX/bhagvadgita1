@@ -9,7 +9,24 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Smile, Zap, Feather } from 'lucide-react'; // Playful icons
+
+interface IFirebaseError extends Error {
+  code: string;
+  customData?: {
+    appName: string;
+  };
+}
+
+function isFirebaseError(err: unknown): err is IFirebaseError {
+  return (
+    typeof err === 'object' &&
+    err !== null &&
+    'code' in err &&
+    typeof (err as { code: unknown }).code === 'string'
+  );
+}
 
 export default function UserLogin() {
   const [email, setEmail] = useState('');
@@ -37,22 +54,25 @@ export default function UserLogin() {
         await signInWithEmailAndPassword(auth, email, password);
       }
       router.push('/user/chapters');
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Auth error:', err);
-      const errorCode = err.code;
-      // More playful error messages
-      if (errorCode === 'auth/email-already-in-use') {
-        setError('Oops! This email is already a superstar here. Try logging in! ✨');
-      } else if (errorCode === 'auth/invalid-email') {
-        setError('Hmm, that email looks a bit funny. Can you double-check it? 🤔');
-      } else if (errorCode === 'auth/weak-password') {
-        setError('Make your password stronger! Like a superhero! 💪 (min. 6 chars)');
-      } else if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
-        setError('Email or Password not matching our records. Give it another go! 🧐');
-      } else if (errorCode === 'auth/network-request-failed') {
-        setError('Network gremlins! 👾 Check your internet and try again.');
-      } else if (errorCode === 'auth/too-many-requests') {
-        setError('Wooah there, speedy! Too many tries. Please wait a bit. 🧘');
+      if (isFirebaseError(err)) {
+        const errorCode = err.code;
+        if (errorCode === 'auth/email-already-in-use') {
+          setError('Oops! This email is already a superstar here. Try logging in! ✨');
+        } else if (errorCode === 'auth/invalid-email') {
+          setError('Hmm, that email looks a bit funny. Can you double-check it? 🤔');
+        } else if (errorCode === 'auth/weak-password') {
+          setError('Make your password stronger! Like a superhero! 💪 (min. 6 chars)');
+        } else if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
+          setError('Email or Password not matching our records. Give it another go! 🧐');
+        } else if (errorCode === 'auth/network-request-failed') {
+          setError('Network gremlins! 👾 Check your internet and try again.');
+        } else if (errorCode === 'auth/too-many-requests') {
+          setError('Wooah there, speedy! Too many tries. Please wait a bit. 🧘');
+        } else {
+          setError('Uh oh! Something went sideways. Try again in a jiffy! 🌪️');
+        }
       } else {
         setError('Uh oh! Something went sideways. Try again in a jiffy! 🌪️');
       }
@@ -135,9 +155,13 @@ export default function UserLogin() {
                 setIsLoading(true);
                 await signInWithPopup(auth, googleProvider);
                 router.push('/user/chapters');
-              } catch (err: any) {
+              } catch (err: unknown) {
                 console.error('Google auth error:', err);
-                setError('Google Sign-In hiccup! 🤧 Try again or the other way.');
+                if (isFirebaseError(err)) {
+                  setError('Google Sign-In hiccup! 🤧 Try again or the other way.');
+                } else {
+                  setError('Uh oh! Something went sideways. Try again in a jiffy! 🌪️');
+                }
               } finally {
                 setIsLoading(false);
               }
@@ -145,7 +169,7 @@ export default function UserLogin() {
             className="w-full flex items-center justify-center gap-3 bg-white border-2 border-red-300 text-gray-700 py-3 rounded-lg font-semibold shadow-md hover:bg-red-50 hover:border-red-400 transition-all duration-300 disabled:opacity-60 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-1"
             disabled={isLoading}
           >
-            <img src="/google-icon.svg" alt="Google" className="w-5 h-5" />
+            <Image src="/google-icon.svg" alt="Google" width={20} height={20} />
             Continue with Google
           </button>
 

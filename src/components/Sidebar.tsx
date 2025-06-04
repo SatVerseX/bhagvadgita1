@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { auth } from '@/firebase/firebaseClient';
 import { signOut, User } from 'firebase/auth';
 import { useState, useEffect, useRef } from 'react';
-import { Home, BookOpen, HelpCircle, UserCircle, LogOut, Shield, LogIn, Menu, Palette } from 'lucide-react';
+import { Home, BookOpen, UserCircle, LogOut, Shield, LogIn, Menu, Palette } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 

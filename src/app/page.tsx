@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image'; 
-import { BookOpen, PlayCircle, Sparkles, Heart, Sun } from 'lucide-react'; // Added fun icons
+import { BookOpen, Sparkles, Heart, Sun } from 'lucide-react'; // Added fun icons
 
 export default function HomePage() {
   return (
@@ -50,22 +50,12 @@ export default function HomePage() {
             <BookOpen className="w-6 h-6 mr-3 transform group-hover:rotate-[-5deg] transition-transform" />
             Read Chapters
           </Link>
-          {/* Removed Test Your Knowledge (Quiz) button as requested */}
-          {/* 
-          <Link 
-            href="/user/quiz" 
-            className="inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-orange-600 bg-white border-2 border-orange-500 rounded-xl shadow-lg hover:bg-orange-50 hover:text-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 transform hover:scale-110 transition-all duration-200 ease-in-out group"
-          >
-            <PlayCircle className="w-6 h-6 mr-3 transform group-hover:rotate-[5deg] transition-transform" />
-            Test Your Knowledge (Quiz)
-          </Link>
-          */}
         </div>
       </main>
 
       <footer className="relative z-10 mt-16 text-center">
         <p className="text-md text-gray-500 italic font-medium">
-          "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।" <Sparkles className="inline w-4 h-4 text-yellow-500 -mt-1" />
+          &quot;कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।&quot; <Sparkles className="inline w-4 h-4 text-yellow-500 -mt-1" />
         </p>
       </footer>
     </div>
