@@ -111,7 +111,7 @@ export default function ChapterDetailPage() {
           <div>
             <h3 className="font-baloo text-xl font-semibold text-sky-700">इस अध्याय का मजेदार तथ्य!</h3>
             <p className="text-sm text-sky-600 mt-1">
-              (जैसे: "इस अध्याय में अर्जुन पहली बार अपनी दुविधा व्यक्त करते हैं!")
+              (जैसे: &quot;इस अध्याय में अर्जुन पहली बार अपनी दुविधा व्यक्त करते हैं!&quot;)
             </p>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image'; 
-import { BookOpen, PlayCircle, Sparkles, Heart, Sun } from 'lucide-react'; // Added fun icons
+import { BookOpen, Sparkles, Heart, Sun } from 'lucide-react'; // Added fun icons
 
 export default function HomePage() {
   return (
@@ -65,7 +65,7 @@ export default function HomePage() {
 
       <footer className="relative z-10 mt-16 text-center">
         <p className="text-md text-gray-500 italic font-medium">
-          "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।" <Sparkles className="inline w-4 h-4 text-yellow-500 -mt-1" />
+          &quot;कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।&quot; <Sparkles className="inline w-4 h-4 text-yellow-500 -mt-1" />
         </p>
       </footer>
     </div>

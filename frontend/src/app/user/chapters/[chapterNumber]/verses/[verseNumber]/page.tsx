@@ -1,26 +1,28 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { BookOpen, MessageCircleQuestion, PlayCircle, Sparkles, Search } from 'lucide-react';
 import { fetchVerse } from '@/lib/rapidapi';
 
 interface VerseDetails {
-  id: string;
+  id: number;
   verse_number: number;
   text: string;
   translations: {
-    author: string;
+    id: number;
+    author_name: string;
     language: string;
     description: string;
   }[];
 }
 
-export default function VerseDetail({ 
-  params 
-}: { 
-  params: { chapterNumber: string; verseNumber: string } 
+export default function VerseDetail({
+  params
+}: {
+  params: Promise<{ chapterNumber: string; verseNumber: string }>;
 }) {
+  const resolvedParams = use(params);
   const [verse, setVerse] = useState<VerseDetails | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -28,25 +30,27 @@ export default function VerseDetail({
     async function loadVerse() {
       try {
         const data = await fetchVerse(
-          Number(params.chapterNumber),
-          Number(params.verseNumber)
+          Number(resolvedParams.chapterNumber),
+          Number(resolvedParams.verseNumber)
         );
         setVerse(data);
       } catch (error) {
         console.error('Error fetching verse:', error);
         // Fallback data
         setVerse({
-          id: "1",
+          id: 1,
           verse_number: 1,
           text: "धृतराष्ट्र उवाच\n\nधर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय॥१.१॥",
           translations: [
             {
-              author: "Shri Purohit Swami",
+              id: 1,
+              author_name: "Shri Purohit Swami",
               language: "english",
               description: "The King Dhritarashtra asked, \"O Sanjaya! What happened on the sacred battlefield of Kurukshetra when my people and the Pandavas gathered?\""
             },
             {
-              author: "Dr. S. Sankaranarayan",
+              id: 2,
+              author_name: "Dr. S. Sankaranarayan",
               language: "english",
               description: "Dhritarashtra said, \"O Sanjaya, what did my sons and the sons of Pandu do in the holy land of Kuruksetra, when they had gathered there, eager for battle?\""
             }
@@ -57,7 +61,7 @@ export default function VerseDetail({
       }
     }
     loadVerse();
-  }, [params.chapterNumber, params.verseNumber]);
+  }, [resolvedParams.chapterNumber, resolvedParams.verseNumber]);
 
   if (loading) {
     return (
@@ -82,12 +86,12 @@ export default function VerseDetail({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-200 via-cyan-100 to-blue-200 px-4 py-8 sm:px-6 lg:px-8 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-br from-sky-200 via-cyan-100 to-blue-200 px-4 pt-20 pb-8 sm:px-6 lg:px-8 flex flex-col items-center">
       <Link
-        href={`/user/chapters/${params.chapterNumber}`}
+        href={`/user/chapters/${resolvedParams.chapterNumber}`}
         className="self-start inline-flex items-center text-blue-700 hover:text-blue-900 mb-6 font-semibold bg-white/70 px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
       >
-        ← अध्याय {params.chapterNumber} पर वापस
+        ← अध्याय {resolvedParams.chapterNumber} पर वापस
       </Link>
 
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 sm:p-8 max-w-4xl w-full border-4 border-blue-400">
@@ -96,7 +100,7 @@ export default function VerseDetail({
             <BookOpen className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
           <h1 className="font-baloo text-3xl sm:text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
-            अध्याय {params.chapterNumber}, श्लोक {params.verseNumber}
+            अध्याय {resolvedParams.chapterNumber}, श्लोक {resolvedParams.verseNumber}
           </h1>
           <p className="text-sm text-gray-500">Verse Details</p>
         </div>
@@ -127,7 +131,7 @@ export default function VerseDetail({
           <div>
             <h3 className="font-baloo text-lg font-semibold text-sky-700">क्या आप जानते हैं? (Did you know?)</h3>
             <p className="text-sm text-sky-600 mt-1">
-              (बच्चों के लिए मजेदार तथ्य यहाँ डालें! जैसे: "महाभारत युद्ध 18 दिनों तक चला था!")
+              (बच्चों के लिए मजेदार तथ्य यहाँ डालें! जैसे: &quot;महाभारत युद्ध 18 दिनों तक चला था!&quot;)
             </p>
           </div>
         </div>
@@ -144,7 +148,7 @@ export default function VerseDetail({
             >
               <p className="text-gray-700 mb-2 text-base sm:text-lg leading-relaxed">{translation.description}</p>
               <p className="text-right text-sm font-medium text-purple-600">
-                — {translation.author} ({translation.language})
+                — {translation.author_name} ({translation.language})
               </p>
             </div>
           ))}

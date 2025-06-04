@@ -3,14 +3,13 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import {
   getAuth,
-  connectAuthEmulator,
   GoogleAuthProvider,
   inMemoryPersistence,
-  setPersistence
+  setPersistence,
+  browserLocalPersistence
 } from 'firebase/auth';
 import {
   getFirestore,
-  connectFirestoreEmulator,
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -28,8 +27,8 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 // Initialize Auth
 const auth = getAuth(app);
 
-// Set persistence to session (optional, but can help with some auth issues)
-setPersistence(auth, inMemoryPersistence);
+// Set persistence to browserLocalPersistence for persistent login
+setPersistence(auth, browserLocalPersistence);
 
 export { auth };
 export const db = getFirestore(app);

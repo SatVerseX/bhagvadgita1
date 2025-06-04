@@ -37,6 +37,8 @@
 html {
   scroll-behavior: smooth;
   background: var(--background);
+  overflow-y: scroll; /* Always show vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 body {

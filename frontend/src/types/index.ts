@@ -31,6 +31,7 @@ export interface GitaChapter {
     text: string;
     transliteration: string;
     word_meanings: string;
+    simple_hindi_explanation?: string;
     translations: {
       id: number;
       description: string;

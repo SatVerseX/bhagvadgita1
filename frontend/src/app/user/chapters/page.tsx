@@ -4,7 +4,7 @@ import { fetchChapters } from '@/lib/rapidapi'; // Assuming this path is correct
 import Link from 'next/link';
 import { GitaChapter } from '@/types'; // Assuming this path is correct for your project
 import { useEffect, useState } from 'react';
-import { BookOpen, ChevronRight } from 'lucide-react'; // ChevronRight can be an alternative to emoji for "read more"
+import { BookOpen } from 'lucide-react'; // ChevronRight can be an alternative to emoji for "read more"
 
 // Accent colors from the provided HTML - these are already quite vibrant and good for kids
 const extendedAccentColors = [

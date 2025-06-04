@@ -112,28 +112,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Login Methods Section */}
-          <div className="mt-12 space-y-4 px-4 sm:px-8">
-            <h3 className="text-xl sm:text-2xl font-semibold text-slate-700 flex items-center justify-center">
-              <ShieldCheck className="w-8 h-8 text-purple-500 mr-2"/>Login Methods
-            </h3>
-            <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
-              {user.providerData.map((provider) => (
-                <div
-                  key={provider.providerId}
-                  className="px-5 py-2.5 bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-200 rounded-full text-base font-medium text-purple-700 shadow-md flex items-center space-x-2 transform hover:scale-105 transition-transform duration-200"
-                >
-                  <LogIn className="w-5 h-5" />
-                  <span>
-                    {provider.providerId === 'google.com' ? 'Google Magic' : 
-                     provider.providerId === 'password' ? 'Secret Scroll (Email)' : 
-                     provider.providerId}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <p className="mt-16 mb-8 text-base text-amber-600 italic px-4">
             Keep exploring, keep smiling, and may your wisdom shine! ✨
           </p>
